@@ -1,0 +1,12 @@
+name: Build APK
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build with Buildozer
+      uses: artem-solovev/buildozer-action@v1
+      with:
+        work-dir: .
+        buildozer-version: stable

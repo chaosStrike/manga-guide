@@ -1,0 +1,124 @@
+#:kivy 2.3.0
+
+<LoginScreen>:
+    name: 'login_screen'
+
+<MainScreen>:
+    name: 'main_screen'
+    BoxLayout:
+        orientation: 'vertical'
+        padding: dp(20)
+        spacing: dp(20)
+        canvas.before:
+            Color:
+                rgba: 0.95, 0.95, 0.95, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        Label:
+            text: "Главная"
+            font_size: dp(32)
+            color: 0.2, 0.6, 0.8, 1
+
+        Label:
+            id: welcome_label
+            text: "Привет, гость!"
+            font_size: dp(20)
+
+        Label:
+            text: "Твоя библиотека пуста\n\nИспользуй AI или поиск"
+            color: 0.4, 0.4, 0.4, 1
+            size_hint_y: None
+            height: dp(100)
+            text_size: self.width, None
+            halign: 'center'
+
+        Button:
+            text: "Перейти к AI"
+            background_color: 0.2, 0.6, 0.8, 1
+            on_release: root.manager.current = 'ai_screen'
+
+        Button:
+            text: "Профиль"
+            background_color: 0.2, 0.6, 0.8, 1
+            on_release: root.manager.current = 'profile_screen'
+
+        Button:
+            text: "Выйти"
+            background_color: 0.8, 0.2, 0.2, 1
+            on_release:
+                app.db.current_user_id = None
+                app.db.current_username = None
+                root.manager.current = 'login_screen'
+
+<ProfileScreen>:
+    name: 'profile_screen'
+    BoxLayout:
+        orientation: 'vertical'
+        padding: dp(20)
+        spacing: dp(20)
+
+        Label:
+            text: "Назад"
+            color: 0.2, 0.6, 0.8, 1
+            font_size: dp(16)
+            on_touch_down: root.manager.current = 'main_screen' if args[1].collide_point(*args[1].pos) else None
+
+        Label:
+            text: "Профиль"
+            font_size: dp(28)
+
+        Label:
+            id: profile_info
+            text: "ID: —\nЛогин: —"
+            color: 0.3, 0.3, 0.3, 1
+            halign: 'left'
+            text_size: self.width, None
+
+        Button:
+            text: "На главную"
+            background_color: 0.2, 0.6, 0.8, 1
+            on_release: root.manager.current = 'main_screen'
+
+<AIAssistantScreen>:
+    name: 'ai_screen'
+    BoxLayout:
+        orientation: 'vertical'
+        padding: dp(20)
+        spacing: dp(15)
+
+        Label:
+            text: "Назад"
+            color: 0.2, 0.6, 0.8, 1
+            on_touch_down: root.manager.current = 'main_screen' if args[1].collide_point(*args[1].pos) else None
+
+        Label:
+            text: "AI Помощник"
+            font_size: dp(24)
+
+        ScrollView:
+            do_scroll_x: False
+            do_scroll_y: True
+            Label:
+                id: chat_history
+                text: "Привет! Я помогу с мангой"
+                color: 0, 0, 0, 1
+                size_hint_y: None
+                height: self.texture_size[1]
+                text_size: self.width, None
+                padding: dp(10), dp(10)
+
+        BoxLayout:
+            size_hint_y: None
+            height: dp(60)
+            spacing: dp(10)
+
+            TextInput:
+                id: question_input
+                hint_text: "Задай вопрос..."
+
+            Button:
+                text: "Отправить"
+                background_color: 0.2, 0.6, 0.8, 1
+                on_release: root.send_question()
