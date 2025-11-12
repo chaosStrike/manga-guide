@@ -36,7 +36,7 @@ android.allow_backup = True
 
 # Бутстрап
 p4a.bootstrap = sdl2
-
+p4a.commit = 8cbfaa5a3289f61c4f41340f6e6f0b99b4e84384
 # --- Иконка и заставка  ---
 icon.filename = %(source.dir)s/data/icon.png
 presplash.filename = %(source.dir)s/data/presplash.jpg

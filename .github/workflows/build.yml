@@ -15,7 +15,7 @@ jobs:
         
     - name: Install Python dependencies
       run: |
-        pip install buildozer kivy==2.1.0 requests pillow cython
+        pip install buildozer kivy==2.1.0 requests pillow cython<3.0
         
     - name: Build APK
       run: |
