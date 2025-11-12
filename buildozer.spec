@@ -12,7 +12,7 @@ source.include_patterns = images/*
 
 # --- Требования (оптимизированы) ---
 requirements = python3,
-    kivy==2.0.0,
+    kivy==2.1.0,
     requests,
     openssl,
     sqlite3,
@@ -36,7 +36,7 @@ android.allow_backup = True
 
 # Бутстрап
 p4a.bootstrap = sdl2
-p4a.commit = 8cbfaa5a3289f61c4f41340f6e6f0b99b4e84384
+p4a.branch = develop
 # --- Иконка и заставка  ---
 icon.filename = %(source.dir)s/data/icon.png
 presplash.filename = %(source.dir)s/data/presplash.jpg
