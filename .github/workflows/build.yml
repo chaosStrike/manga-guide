@@ -3,19 +3,19 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
+    container:
+      image: python:3.9
     steps:
     - uses: actions/checkout@v4
     
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.9'
-    
-    - name: Install Buildozer
+    - name: Install system dependencies
       run: |
-        pip install buildozer cython
-        sudo apt update
-        sudo apt install -y git zip unzip openjdk-17-jdk python3-pip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev cmake libffi-dev libssl-dev
+        apt update
+        apt install -y openjdk-17-jdk git zip unzip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev cmake libffi-dev libssl-dev
+        
+    - name: Install Python dependencies
+      run: |
+        pip install buildozer kivy==2.1.0 requests pillow cython
         
     - name: Build APK
       run: |
