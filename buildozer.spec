@@ -12,7 +12,7 @@ source.include_patterns = images/*
 
 # --- Требования (оптимизированы) ---
 requirements = python3,
-    kivy==2.1.0,
+    kivy==2.0.0,
     requests,
     openssl,
     sqlite3,
