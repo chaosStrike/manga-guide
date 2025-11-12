@@ -3,15 +3,14 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
+    container:
+      image: kivy/kivy:latest
     steps:
     - uses: actions/checkout@v4
     
-    - name: Setup Android SDK
-      uses: android-actions/setup-android@v3
-      
-    - name: Install Python and Buildozer
+    - name: Install buildozer
       run: |
-        pip3 install buildozer "cython<3.0"
+        pip install buildozer
         
     - name: Build APK
       run: |
