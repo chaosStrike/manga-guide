@@ -11,7 +11,7 @@ jobs:
     - name: Install system dependencies
       run: |
         apt update
-        apt install -y openjdk-17-jdk git zip unzip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev cmake libffi-dev libssl-dev
+        apt install -y default-jdk git zip unzip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev cmake libffi-dev libssl-dev python3-pip
         
     - name: Install Python dependencies
       run: |
