@@ -9,4 +9,4 @@ requirements = python3,kivy,requests,pillow
 
 [buildozer]
 log_level = 2
-
+accept_license = true
