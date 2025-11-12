@@ -3,18 +3,33 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
-    container:
-      image: kivy/kivy:latest
     steps:
     - uses: actions/checkout@v4
     
-    - name: Install buildozer
+    - name: Clean everything
       run: |
-        pip install buildozer
+        rm -rf ~/.buildozer
+        rm -rf .buildozer
+        sudo rm -rf /opt/hostedtoolcache/android-sdk*
+        
+    - name: Install system dependencies
+      run: |
+        sudo apt update
+        sudo apt install -y python3-pip python3-venv openjdk-17-jdk git zip unzip autoconf libtool pkg-config zlib1g-dev libncurses5-dev
+        
+    - name: Install Python packages
+      run: |
+        pip3 install buildozer "cython<3.0" kivy requests pillow
+        
+    - name: Pre-accept Android licenses
+      run: |
+        mkdir -p ~/.android
+        touch ~/.android/repositories.cfg
+        yes | $ANDROID_HOME/tools/bin/sdkmanager --licenses || true
         
     - name: Build APK
       run: |
-        yes | buildozer android debug
+        buildozer android debug
       
     - name: Upload APK
       uses: actions/upload-artifact@v4
