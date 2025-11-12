@@ -13,7 +13,7 @@ jobs:
         
     - name: Install Buildozer
       run: |
-        pip3 install buildozer
+        pip3 install buildozer "cython<3.0"
         
     - name: Build APK
       run: |
