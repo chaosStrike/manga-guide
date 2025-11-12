@@ -9,4 +9,7 @@ requirements = python3,kivy,requests,pillow
 
 [buildozer]
 log_level = 2
-accept_license = true
+
+[android]
+android.ndk_path = /usr/local/lib/android/sdk/ndk/27.3.13750724
+android.sdk_path = /usr/local/lib/android/sdk
